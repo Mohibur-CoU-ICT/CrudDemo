@@ -50,4 +50,23 @@ public class EmployeeController {
     public void deleteAllEmployees() {
         employeeService.deleteAllEmployees();
     }
+
+    @GetMapping(value = "/sorted")
+    public Page<Employee> getEmployeesSorted(
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size,
+            @RequestParam("sortDir") Optional<String> sortDirection,
+            @RequestParam("sortBy") Optional<String> sortBy){
+        return employeeService.getEmployeesSorted(page, size, sortDirection, sortBy);
+    }
+
+    @GetMapping(value = "/sorted/pagewise")
+    public List<Employee> getEmployeesPageWiseSorted(
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size,
+            @RequestParam("sortDir") Optional<String> sortDirection,
+            @RequestParam("sortBy") Optional<String> sortBy){
+        return employeeService.getEmployeesPageWiseSorted(page, size, sortDirection, sortBy);
+    }
+
 }

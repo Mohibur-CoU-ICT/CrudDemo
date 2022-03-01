@@ -9,6 +9,16 @@ import java.util.Optional;
 public interface EmployeeService {
     Employee getEmployeeById(long id);
     List<Employee> getAllEmployees();
+    Page<Employee> getEmployeesSorted(
+            Optional<Integer>page,
+            Optional<Integer>size,
+            Optional<String>sortDirection,
+            Optional<String>sortBy);
+    List<Employee> getEmployeesPageWiseSorted(
+            Optional<Integer>page,
+            Optional<Integer>size,
+            Optional<String>sortDirection,
+            Optional<String>sortBy);
     Employee createEmployee(Employee employee);
     void deleteEmployee(long id);
     void deleteAllEmployees();

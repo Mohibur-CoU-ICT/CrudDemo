@@ -10,5 +10,10 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-    
+    @Query(value = "SELECT * FROM (SELECT * FROM employee LIMIT :size OFFSET :offset) res ORDER BY :sortBy :sortDir", nativeQuery = true)
+    List<Employee> getEmployeesPageWiseSorted(
+            @Param("size") int size,
+            @Param("offset") int offset,
+            @Param("sortDir") String sortDir,
+            @Param("sortBy") String sortBy);
 }

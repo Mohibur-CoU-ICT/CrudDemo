@@ -37,6 +37,42 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Page<Employee> getEmployeesSorted(
+            Optional<Integer> page,
+            Optional<Integer> size,
+            Optional<String> sortDirection,
+            Optional<String> sortBy) {
+        System.out.println("getEmployeesSorted called");
+        System.out.println("page = " + page.orElse(0) + ", size = " + size.orElse(10) + ", offset = " +
+                page.orElse(0) * size.orElse(10) + ", sortDirection = " + sortDirection.orElse("ASC") + ", sortBy = " + sortBy.orElse("id"));
+        return employeeRepository.findAll(
+                PageRequest.of(
+                        page.orElse(0),
+                        size.orElse(10),
+                        Sort.Direction.valueOf(sortDirection.orElse("ASC")),
+                        sortBy.orElse("id")
+                )
+        );
+    }
+
+    @Override
+    public List<Employee> getEmployeesPageWiseSorted(
+            Optional<Integer> page,
+            Optional<Integer> size,
+            Optional<String> sortDirection,
+            Optional<String> sortBy) {
+        System.out.println("getEmployeesPageWiseSorted called");
+        System.out.println("page = " + page.orElse(0) + ", size = " + size.orElse(10) + ", offset = " +
+                page.orElse(0) * size.orElse(10) + ", sortDirection = " + sortDirection.orElse("ASC") + ", sortBy = " + sortBy.orElse("id"));
+        return employeeRepository.getEmployeesPageWiseSorted(
+                size.orElse(10),
+                page.orElse(0) * size.orElse(10),
+                String.valueOf(Sort.Direction.valueOf(sortDirection.orElse("ASC"))),
+                sortBy.orElse("id")
+        );
+    }
+
+    @Override
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
