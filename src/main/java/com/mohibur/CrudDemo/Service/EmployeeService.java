@@ -20,6 +20,7 @@ public interface EmployeeService {
             Optional<String>sortDirection,
             Optional<String>sortBy);
     Employee createEmployee(Employee employee);
+    List<Employee> createEmployees(List<Employee> employees);
     void deleteEmployee(long id);
     void deleteAllEmployees();
 }

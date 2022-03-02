@@ -78,6 +78,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<Employee> createEmployees(List<Employee> employees) {
+        return employeeRepository.saveAll(employees);
+    }
+
+    @Override
     public void deleteEmployee(long id) {
         employeeRepository.deleteById(id);
     }

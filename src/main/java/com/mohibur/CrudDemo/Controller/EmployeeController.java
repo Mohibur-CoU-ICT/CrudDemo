@@ -30,6 +30,11 @@ public class EmployeeController {
         return employeeService.createEmployee(employee);
     }
 
+    @PostMapping(value = "/create/many")
+    public List<Employee> createEmployees(@RequestBody List<Employee> employees) {
+        return employeeService.createEmployees(employees);
+    }
+
     @PutMapping(value = "/update/{id}")
     public Employee updateEmployee(@PathVariable(value = "id") long id, @RequestBody Employee employee) {
         Employee updatedEmployee = employeeService.getEmployeeById(id);
