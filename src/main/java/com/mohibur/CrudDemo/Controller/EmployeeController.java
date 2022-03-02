@@ -32,13 +32,13 @@ public class EmployeeController {
 
     @PutMapping(value = "/update/{id}")
     public Employee updateEmployee(@PathVariable(value = "id") long id, @RequestBody Employee employee) {
-        Employee employee1 = employeeService.getEmployeeById(id);
-        employee1.setName(employee.getName());
-        employee1.setDepartment(employee.getDepartment());
-        employee1.setAddress(employee.getAddress());
-        employee1.setSalary(employee.getSalary());
-        employee1.setDateOfBirth(employee.getDateOfBirth());
-        return employeeService.createEmployee(employee1);
+        Employee updatedEmployee = employeeService.getEmployeeById(id);
+        if(employee.getName() != null) updatedEmployee.setName(employee.getName());
+        if(employee.getDepartment() != null) updatedEmployee.setDepartment(employee.getDepartment());
+        if(employee.getAddress() != null) updatedEmployee.setAddress(employee.getAddress());
+        if(employee.getSalary() != 0L) updatedEmployee.setSalary(employee.getSalary());
+        if(employee.getDateOfBirth() != null) updatedEmployee.setDateOfBirth(employee.getDateOfBirth());
+        return employeeService.createEmployee(updatedEmployee);
     }
 
     @DeleteMapping(value = "/delete/{id}")
